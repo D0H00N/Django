@@ -30,7 +30,7 @@
             font-family: 'Times New Roman', Times, serif;
             font-size: 86px;
             text-align: center;
-            margin: 20px 0;
+            margin: 5px 0;
         }
         img { display: block; margin: 0 auto; }
         .center-content {
@@ -45,13 +45,27 @@
             margin: 0 auto;
         }
         h2 {
-            font-size: 36px;
-            margin-top: 40px;
+            font-size: 86px;
+            margin-top: 100px;
         }
         .language-icons {
             display: flex;
-            justify-content: center;
-            gap: 10px;
+            justify-content: center; /* 가운데 정렬 */
+            gap: 20px; /* 아이콘 간격 조정 */
+            margin-top: 20px; /* 위쪽 마진 추가 */
+        }
+        .language-icons img {
+            height: 80px; /* 이미지 크기 조정 */
+            transition: transform 0.9s ease; /* 호버 시 애니메이션 효과 */
+        }
+        .intro {
+            font-size: 40px; 
+            font-family:sans-serif
+            font-weight: bold; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: left;
         }
     </style>
 </head>
@@ -64,31 +78,43 @@
     </header>
 
     <pre><strong><i>
-        
 "Life is an endless series 
-of train_wrecks
-with only bref, 
+of train wrecks
+with only brief, 
 commercial-like 
 breaks of happiness."
-    </i></strong></pre>
+</i></strong></pre>
+    
     <img src="images/deadpool-desktop-3840x2160.jpg" width="400" height="200" alt='외출해버렸네요..'>
 
     <div class="center-content">
-        <section id="introduce">
-            <h2>AboutMe</h2>
+        <section id="introduce">           
+            <h2>About Me</h2>
             <img src="images/deadpool-love-3840x2160.jpg" width="300" height="200" alt='외출해버렸네요..'>
-            <p><strong><i>Maximum Effort "DoHoon"</i></strong></p>
-        </section>
+            
+    <pre class="intro"><strong><i>
+안녕하세요! 반갑습니다 :>
 
-        <section id="Language">
-            <h2>Most Used Language</h2>
-            <div class="language-icons">
-                <img height="50" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/python/python.png">
-                <img height="50" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/django/django.png">
-            </div>
+이도훈입니다!  
 
-            <p><i>'Monday Tuesday Wednesday Thursday Friday Seven days a week'</i></p>
-        </section>
-    </div>
+'데이터 전문가'가 되기 위한 여정
+
+끝까지 해내 저의 꿈을 이룰 것입니다!
+      
+</i></strong></pre>
+
+
+         <section id="Language">
+             <h2>Most Used Language</h2>
+             <div class="language-icons">
+                 <!-- 이미지 크기를 키우고 가운데 정렬 -->
+                 <img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/python/python.png" alt="Python">
+                 <img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/django/django.png" alt="Django">
+             </div>
+
+             <p><i>'Monday Tuesday Wednesday Thursday Friday Seven days a week'</i></p>
+         </section>
+     </div>
 </body>
 </html>
+
