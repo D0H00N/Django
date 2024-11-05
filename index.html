@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Homepage</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        header {
+            background-color: black;
+            padding: 1px;
+            display: flex;
+            align-items: center;
+        }
+        h1 {
+            color: white;
+            margin-right: 10px;
+            padding-bottom: 1px;
+        }
+        h3 {
+            display: inline;
+            margin-left: 20px;
+        }
+        a { color: white; text-decoration: none; }
+        pre {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 86px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        img { display: block; margin: 0 auto; }
+        .center-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        #introduce, #Language {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h2 {
+            font-size: 36px;
+            margin-top: 40px;
+        }
+        .language-icons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>My Page</h1>
+        <h3><a href="#introduce">AboutMe</a></h3>        
+        <h3><a href="#Language">Language</a></h3>
+        <h3><a href="https://github.com/D0H00N">Github</a></h3>
+    </header>
+
+    <pre><strong><i>
+        
+"Life is an endless series 
+of train_wrecks
+with only bref, 
+commercial-like 
+breaks of happiness."
+    </i></strong></pre>
+    <img src="images/deadpool-desktop-3840x2160.jpg" width="400" height="200" alt='외출해버렸네요..'>
+
+    <div class="center-content">
+        <section id="introduce">
+            <h2>AboutMe</h2>
+            <img src="images/deadpool-love-3840x2160.jpg" width="300" height="200" alt='외출해버렸네요..'>
+            <p><strong><i>Maximum Effort "DoHoon"</i></strong></p>
+        </section>
+
+        <section id="Language">
+            <h2>Most Used Language</h2>
+            <div class="language-icons">
+                <img height="50" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/python/python.png">
+                <img height="50" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/django/django.png">
+            </div>
+
+            <p><i>'Monday Tuesday Wednesday Thursday Friday Seven days a week'</i></p>
+        </section>
+    </div>
+</body>
+</html>
