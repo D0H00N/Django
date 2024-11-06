@@ -67,6 +67,14 @@
             align-items: center;
             text-align: left;
         }
+        .dark-mode {
+            background-color: #2c2c2c;
+            color: #ffffff;
+        }
+
+        .dark-mode header, .dark-mode body,  {
+            background-color: #1c1c1c;
+
     </style>
 </head>
 <body>
@@ -75,6 +83,7 @@
         <h3><a href="#introduce">AboutMe</a></h3>        
         <h3><a href="#Language">Language</a></h3>
         <h3><a href="https://github.com/D0H00N">Github</a></h3>
+        <button id="darkModeToggle" style="position: fixed; top: 20px; right: 20px;">dark mode</button>
     </header>
 
     <pre><strong><i>
@@ -85,12 +94,12 @@ commercial-like
 breaks of happiness."
 </i></strong></pre>
     
-    <img src="deadpool-desktop-3840x2160.jpg" width="400" height="200" alt='외출해버렸네요..'>
+    <img src="images/deadpool-desktop-3840x2160.jpg" width="400" height="200" alt='외출해버렸네요..'>
 
     <div class="center-content">
         <section id="introduce">           
             <h2>About Me</h2>
-            <img src="deadpool-love-3840x2160.jpg" width="300" height="200" alt='외출해버렸네요..'>
+            <img src="images/deadpool-love-3840x2160.jpg" width="300" height="200" alt='외출해버렸네요..'>
             
     <pre class="intro"><strong><i>
 안녕하세요! 반갑습니다 :>
@@ -115,6 +124,31 @@ breaks of happiness."
              <p><i>'Monday Tuesday Wednesday Thursday Friday Seven days a week'</i></p>
          </section>
      </div>
+     <script>
+        //타이핑 에니메이션
+        document.addEventListener('DOMContentLoaded', function() {
+            let textElement = document.querySelector('.intro');
+            let text = textElement.textContent;
+            textElement.textContent = '';
+            let index = 0;
+
+            function typeEffect() {
+                if (index < text.length) {
+                    textElement.textContent += text.charAt(index);
+                    index++;
+                    setTimeout(typeEffect, 150); // 타이핑 속도 조절 (ms 단위)
+                }
+            }
+
+            typeEffect();
+        });
+
+        // 다크 모드 토글
+        document.getElementById('darkModeToggle').addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+        });
+
+     </script>
 </body>
 </html>
 
