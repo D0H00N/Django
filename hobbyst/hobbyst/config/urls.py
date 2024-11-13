@@ -22,8 +22,8 @@ from config.views import index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('board/', include('board.urls')),
-    path('account/', include('account.urls')),
+    path('board/', include(('board.urls', 'board'), namespace='board')),
+    path('account/', include(('account.urls', 'account'), namespace='account')),
     path('', index),
 ]
 

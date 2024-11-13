@@ -1,13 +1,74 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HOME</title>
-</head>
-<body>
-    <h1>HOBBYST</h1>
-    <div>{{ user.username }} (ID: {{ user.id}})</div>
-    <a href="/account/logout/">로그아웃</a>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block content %}
+<nav>
+    <h1>
+        <a href="/board/">Hobbyst</a>
+    </h1>
+    <a href="/account/post_write/">Add post</a>
+    <a href="/account/logout/">Logout</a>
+
+</nav>
+    <div id="home" class="post-container">
+        <!-- 전달된 Post QuerySet객체를 순회 -->
+    <div class="grid"></div>
+        {% for post in board %}
+            <article class="post">
+                <header class="post-header">
+                    {% if post.user.profile_image %}
+                        <img src="{{ post.user.profile_image.url }}">
+                    {% endif %}
+                    <span>{{ post.user.username }}</span>
+                </header>
+            
+                <!-- 이미지 슬라이드 영역 시작 -->
+                <div class="post-images splide">
+                    <div class="splide__track">
+                        <ul class="splide__list">
+                            {% for image in post.postimage_set.all %}
+                                {% if image.photo %}
+                                    <li class="splide__slide">
+                                        <img src="{{ image.photo.url }}">
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <!-- 이미지 슬라이드 영역 종료 -->
+
+                <div class="post-content">
+                    {{ post.content|linebreaksbr}}
+                </div>
+                <div class="post-buttons">
+                    <button>Likes(0)</button>
+                    <span>Comments(0)</span>
+                </div>
+
+                <div class="post-comments">
+                    <ul>
+                        <!-- 각 Post에 연결된 PostComment들을 순회 -->
+                        {% for comment in post.comment_set.all %}
+                            <li>
+                                <span>{{ comment.user.username }}</span>
+                                <span>{{ comment.content }}</span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <small>{{ post.created }}</small>
+                <div class="post-comment-create">
+                    <input type="text" placeholder="댓글 달기...">
+                    <button type="submit">게시</button>
+                </div>
+            </article>
+        {% endfor %}
+    </div>
+    <!-- Splide 초기화 자바스크립트 코드 -->
+<script>
+    const elms = document.getElementsByClassName('splide');
+    for (let i = 0; i < elms.length; i++) {
+        new Splide(elms[i]).mount();
+    }
+</script>
+    {% endblock %}
