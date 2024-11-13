@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-
 # Create your views here.
 
 def home(request):
@@ -7,3 +6,4 @@ def home(request):
         return redirect('/account/login')
 
     return render(request, 'board/home.html')
+

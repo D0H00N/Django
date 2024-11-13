@@ -1,18 +1,13 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login page</title>
-</head>
-<body>
-    <h1>Login</h1>
+{% extends 'base.html' %}
+
+{% block content %}
+<div id="login">
     <form method="POST">
+        <h1>HOBBYST</h1>
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">로그인</button>
-
+        <button type="submit" class="btn btn-login">로그인</button>
+        <a href="/account/signup">회원가입</a>
     </form>
-    
-</body>
-</html>
+</div>
+{% endblock %}
