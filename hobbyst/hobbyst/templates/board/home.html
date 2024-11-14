@@ -1,74 +1,86 @@
 {% extends 'base.html' %}
 {% block content %}
+
+<style>
+    .tag-container {
+        display: grid; 
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin: 100px auto;
+        max-width: 600px;
+        padding: 0 20px;
+    }
+    .tag-box {
+        background-color: #f0f0f0;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        aspect-ratio: 1 / 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+        font-size: 16px;
+        font-weight: bold;
+        color: #333;
+        text-decoration: none;
+        word-break: break-word;
+        padding: 10px;
+    }
+    .search-container {
+        max-width: 600px;
+        margin: 80px auto 20px;
+        padding: 0 20px;
+    }
+    .search-container input[type="search"] {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+</style>
+
 <nav>
     <h1>
-        <a href="/board/">Hobbyst</a>
+        <a href="{% url 'board:home' %}">Hobbyst</a>
     </h1>
-    <a href="/account/post_write/">Add post</a>
-    <a href="/account/logout/">Logout</a>
-
+    <a href="{% url 'board:post_add' %}">Add post</a>
+    <a href="{% url 'account:logout' %}">Logout</a>
 </nav>
-    <div id="home" class="post-container">
-        <!-- 전달된 Post QuerySet객체를 순회 -->
-    <div class="grid"></div>
-        {% for post in board %}
-            <article class="post">
-                <header class="post-header">
-                    {% if post.user.profile_image %}
-                        <img src="{{ post.user.profile_image.url }}">
-                    {% endif %}
-                    <span>{{ post.user.username }}</span>
-                </header>
-            
-                <!-- 이미지 슬라이드 영역 시작 -->
-                <div class="post-images splide">
-                    <div class="splide__track">
-                        <ul class="splide__list">
-                            {% for image in post.postimage_set.all %}
-                                {% if image.photo %}
-                                    <li class="splide__slide">
-                                        <img src="{{ image.photo.url }}">
-                                    </li>
-                                {% endif %}
-                            {% endfor %}
-                        </ul>
-                    </div>
-                </div>
-                <!-- 이미지 슬라이드 영역 종료 -->
 
-                <div class="post-content">
-                    {{ post.content|linebreaksbr}}
-                </div>
-                <div class="post-buttons">
-                    <button>Likes(0)</button>
-                    <span>Comments(0)</span>
-                </div>
+<!-- 검색 바 추가 -->
+<div class="search-container">
+    <input type="search" id="tagSearch" placeholder="Search tags..." aria-label="Search tags">
+</div>
 
-                <div class="post-comments">
-                    <ul>
-                        <!-- 각 Post에 연결된 PostComment들을 순회 -->
-                        {% for comment in post.comment_set.all %}
-                            <li>
-                                <span>{{ comment.user.username }}</span>
-                                <span>{{ comment.content }}</span>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-
-                <small>{{ post.created }}</small>
-                <div class="post-comment-create">
-                    <input type="text" placeholder="댓글 달기...">
-                    <button type="submit">게시</button>
-                </div>
-            </article>
+<!-- 태그 박스 컨테이너 추가 -->
+<div class="tag-container">
+        {% for tag in tags %}
+            <a href="{% url 'board:tags' tag_name=tag.name %}" class="tag-box"
+            style="background-image: url('{{ tag.first_post_image_url }}');">
+                #{{ tag.name }}
+            </a>
         {% endfor %}
-    </div>
-    <!-- Splide 초기화 자바스크립트 코드 -->
+</div>
+
 <script>
-    const elms = document.getElementsByClassName('splide');
-    for (let i = 0; i < elms.length; i++) {
-        new Splide(elms[i]).mount();
-    }
+    // 검색 기능 구현
+    document.getElementById('tagSearch').addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        const tagBoxes = document.querySelectorAll('.tag-box');
+        
+        tagBoxes.forEach(box => {
+            const tagName = box.textContent.toLowerCase();
+            if (tagName.includes(searchTerm)) {
+                box.style.display = '';
+            } else {
+                box.style.display = 'none';
+            }
+        });
+    });
 </script>
-    {% endblock %}
+
+{% endblock %}
