@@ -255,11 +255,14 @@ article.post header.post-header a {
   align-items: center;
 }
 article.post header.post-header img {
-  height: 32px;
+  width: 32px;  /* 원하는 크기로 조정 가능 */
+  height: 32px; /* width와 동일한 값으로 설정 */
   border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  margin-right: 10px;
   border: 1px solid #eee;
   box-sizing: border-box;
-  margin-right: 10px;
 }
 article.post header.post-header span {
   font-weight: bold;
