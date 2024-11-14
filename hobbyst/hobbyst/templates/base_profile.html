@@ -12,7 +12,9 @@
             <div class="counts">
                 <dl>
                     <dt>Posts</dt>
-                    <dd>0</dd>
+                    <dd>
+                        <a href="{% url 'account:profile' user_id=user.id %}">{{ user.post_set.count }}</a>
+                    </dd>
                     <dt>Followers</dt>
                     <dd>
                         <a href="{% url 'account:followers' user_id=user.id %}">
@@ -31,7 +33,6 @@
             <p>선호하는 취미 카테고리 : {{ user.preference }}</p>
         </div>
     </div>
-
     {% block bottom_data %}{% endblock %}
 </div>
 {% endblock %}

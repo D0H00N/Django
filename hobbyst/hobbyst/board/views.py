@@ -13,6 +13,7 @@ from board.forms import CommentForm, PostForm
 
 
 def home(request):
+    user = request.user
     if not request.user.is_authenticated:
         return redirect("account:login")
     posts = Post.objects.all().order_by('-created')
@@ -154,4 +155,3 @@ def post_like(request, post_id):
     # next로 값이 전달되었다면 해당 위치로, 전달되지 않았다면 피드페이지에서 해당 Post위치로 이동한다
     url_next = request.GET.get("next") or reverse("board:home") + f"#post-{post.id}"
     return HttpResponseRedirect(url_next)
- 

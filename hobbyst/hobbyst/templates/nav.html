@@ -1,4 +1,6 @@
 <nav>
     <h1><a href="{% url 'board:home' %}">HOBBYST</a></h1>
+    <a href="{% url 'board:post_add' %}">Add post</a>
+    <a href="{% url 'account:profile' user_id=request.user.id %}">내 프로필</a>
     <a href="{% url 'account:logout' %}">로그아웃</a>
 </nav>

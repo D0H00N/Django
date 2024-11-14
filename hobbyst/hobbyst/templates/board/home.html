@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
-{% block content %}
+{% load custom_tags %}
 
+{% block content %}
 <style>
     .tag-container {
         display: grid; 
@@ -28,9 +29,7 @@
         word-break: break-word;
         padding: 10px;
     }
-    .tag-box:hover {
-        transform: scale(1.05);
-    }
+
     .search-container {
         max-width: 600px;
         margin: 100px auto 20px;
@@ -48,9 +47,10 @@
 
 <nav>
     <h1>
-        <a href="{% url 'board:home' %}">Hobbyst</a>
+        <a href="{% url 'board:home' %}">HOBBYST</a>
     </h1>
     <a href="{% url 'board:post_add' %}">Add post</a>
+    <a href="{% url 'account:profile' user_id=request.user.id %}">내 프로필</a>
     <a href="{% url 'account:logout' %}">Logout</a>
 </nav>
 
