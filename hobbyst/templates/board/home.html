@@ -1,0 +1,112 @@
+{% extends 'base_slider.html' %}
+{% load custom_tags %}
+{% load static %}
+{% block content %}
+<style>
+    nav {
+        display: flex;
+        align-items: center;
+        padding: 10px 20px;
+        color: #333;
+    }
+    
+    nav h1 {
+        display: flex;
+        align-items: center;
+        margin: 0;
+    }
+    
+    .logo {
+        height: 30px;  /* Adjust as needed */
+        margin-right: 10px;
+        margin-top: 10px;
+        transform: scale(1.5);
+    }
+    .tag-container {
+        display: grid; 
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin: 100px auto;
+        max-width: 600px;
+        padding: 0 20px;
+    }
+    .tag-box {
+        background-color: #f0f0f0;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        aspect-ratio: 1 / 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+        font-size: 16px;
+        font-weight: bold;
+        color: #333;
+        text-decoration: none;
+        word-break: break-word;
+        padding: 10px;
+        background-size: cover;  
+        background-position: center;  
+    }
+
+    .search-container {
+        max-width: 600px;
+        margin: 100px auto 20px;
+        padding: 0 20px;
+    }
+    .search-container input[type="search"] {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+</style>
+
+<nav>
+    <h1>
+        <img src="{% static 'logo/logo.png' %}" alt="HOBBYST Logo" class="logo">
+        <a href="{% url 'board:home' %}">HOBBYST</a>
+    </h1>
+        <a href="{% url 'board:feed_page' %}">Feeds</a>
+        <a href="{% url 'board:post_add' %}">Addpost</a>
+        <a href="{% url 'account:profile' user_id=request.user.id %}">Mypage</a>
+        <a href="{% url 'account:logout' %}">Logout</a>
+</nav>
+
+<!-- 검색 바 추가 -->
+<div class="search-container">
+    <input type="search" id="tagSearch" placeholder="Search tags..." aria-label="Search tags">
+</div>
+
+<!-- 태그 박스 컨테이너 추가 -->
+<div class="tag-container">
+        {% for tag in tags %}
+            <a href="{% url 'board:tags' tag_name=tag.name %}" class="tag-box"
+            style="background-image: url('{{ tag.first_post_image_url }}');">
+                #{{ tag.name }}
+            </a>
+        {% endfor %}
+</div>
+
+<script>
+    // 검색 기능 구현
+    document.getElementById('tagSearch').addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        const tagBoxes = document.querySelectorAll('.tag-box');
+        
+        tagBoxes.forEach(box => {
+            const tagName = box.textContent.toLowerCase();
+            if (tagName.includes(searchTerm)) {
+                box.style.display = '';
+            } else {
+                box.style.display = 'none';
+            }
+        });
+    });
+</script>
+
+{% endblock %}

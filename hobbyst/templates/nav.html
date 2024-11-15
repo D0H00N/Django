@@ -1,0 +1,17 @@
+{% load static %}
+<style>
+    .logo {
+        height: 30px;  /* Adjust as needed */
+        margin-right: 10px;
+        margin-top: 10px;
+        transform: scale(1.5);
+    }
+</style>
+<nav>
+    <img src="{% static 'logo/logo.png' %}" alt="HOBBYST Logo" class="logo">
+    <h1><a href="{% url 'board:home' %}">HOBBYST</a></h1>
+    <a href="{% url 'board:feed_page' %}">Feeds</a>
+    <a href="{% url 'board:post_add' %}">Addpost</a>
+    <a href="{% url 'account:profile' user_id=request.user.id %}">Mypage</a>
+    <a href="{% url 'account:logout' %}">Logout</a>
+</nav>
