@@ -1,8 +1,27 @@
 {% extends 'base_slider.html' %}
 {% load custom_tags %}
-
+{% load static %}
 {% block content %}
 <style>
+    nav {
+        display: flex;
+        align-items: center;
+        padding: 10px 20px;
+        color: #333;
+    }
+    
+    nav h1 {
+        display: flex;
+        align-items: center;
+        margin: 0;
+    }
+    
+    .logo {
+        height: 30px;  /* Adjust as needed */
+        margin-right: 10px;
+        margin-top: 10px;
+        transform: scale(1.5);
+    }
     .tag-container {
         display: grid; 
         grid-template-columns: repeat(3, 1fr);
@@ -28,6 +47,8 @@
         text-decoration: none;
         word-break: break-word;
         padding: 10px;
+        background-size: cover;  
+        background-position: center;  
     }
 
     .search-container {
@@ -47,11 +68,13 @@
 
 <nav>
     <h1>
+        <img src="{% static 'logo/logo.png' %}" alt="HOBBYST Logo" class="logo">
         <a href="{% url 'board:home' %}">HOBBYST</a>
     </h1>
-    <a href="{% url 'board:post_add' %}">Add post</a>
-    <a href="{% url 'account:profile' user_id=request.user.id %}">내 프로필</a>
-    <a href="{% url 'account:logout' %}">Logout</a>
+        <a href="{% url 'board:feed_page' %}">Feeds</a>
+        <a href="{% url 'board:post_add' %}">Addpost</a>
+        <a href="{% url 'account:profile' user_id=request.user.id %}">Mypage</a>
+        <a href="{% url 'account:logout' %}">Logout</a>
 </nav>
 
 <!-- 검색 바 추가 -->
