@@ -1,10 +1,15 @@
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 from account.forms import LoginForm, SignupForm
 from account.models import User
-
+from rest_framework import status, generics, mixins#, viewsets, permissions
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.decorators import api_view
+from .serializers import RegisterSerializer
 
 # Create your views here.
 def login_view(request):
@@ -99,3 +104,10 @@ def follow(request, user_id):
 
     url_next = request.GET.get("next") or reverse("account:profile", args=[user.id])
     return HttpResponseRedirect(url_next)
+
+class RegisterUsers(APIView):
+   def get(self, request):
+        users = User.objects.all()
+        serializer = RegisterSerializer(users, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+        
